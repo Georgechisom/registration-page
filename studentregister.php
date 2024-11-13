@@ -53,12 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 $subject = "Successful Registration";
                 $message = "
                     <div style=\"padding: 10px; background-color: #ffffff; color: #000000;\">
-                        Congratulations! You've registered <br> <br> Dear <strong style=\"color: #000000\">'$firstname' '$lastname' </strong> <br> <br>
+                        Congratulations! You've registered <br> <br> Dear <strong style=\"color: #000000\">$firstname $lastname </strong> <br> <br>
                         Congratulations on successfully registering for the Southeast Campus Tour! We're thrilled to have you on board. <br>
-                        Your Registration Code <br> <h1 style=\"text-align: center;  color: #008000\">'$ticket_id'</h1> <br>
+                        Your Registration Code <br> <h1 style=\"text-align: center;  color: #008000\">$ticket_id</h1> <br>
                         This code would serve as your access code to the venue. <br> <br>
                         Customize Your DP: Click this link to generate your personalized event DP: <a href=\"https://getdp.co/qPm\" style=\"text-decoration: none; color: #008000; cursor:pointer\">https://getdp.co/qPm</a> <br> <br>
-                        <img src=\"./GSLZ2161.JPG\" alt=\"eventImage\" style=\"width: 100%;\"> <br> <br>
+                        <img src=\"https://www.paradisecomfort.com.ng/GSLZ2161.JPG\" alt=\"eventImage\" style=\"width: 100%;\"> <br> <br>
                         Event Details: <br> <br>
                         <ul>
                             <li>

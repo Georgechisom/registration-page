@@ -8,17 +8,15 @@ $success = false;
 $error = '';
 
 // Check if the form has been submitted
-if (!isset($_POST['verify'])) {
-    $error = "Welcome Kindly validate your email";
-} else {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Sanitize user input
-    $email = filter_var($_POST['email'], FILTER_SANITIZE_EMAIL);
+    $email = trim($_POST['email']);
     $token = rand(100000,999999);
 
     // Validate email format
     if ($email === "") {
-        $error = "Fields cannot be empty!";
+        $error = "Fields cannot be empty! Input email";
     } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $error = "Invalid Email!";
     } else {
@@ -36,7 +34,7 @@ if (!isset($_POST['verify'])) {
         if (!$execute) {
             $error = "Oops, something went wrong!";
         } elseif ($numRows > 0) {
-                $error = "Account already exists!";
+            $error = "Account already exists!";
         } else {
             // Insert new user record into the database
             $sql = "INSERT INTO registrations(email) VALUE(?)";
@@ -53,38 +51,28 @@ if (!isset($_POST['verify'])) {
         
             $execute = mysqli_stmt_execute($stmt);
 
-
-            if (!$execute) {
-                $error = "Oops, something went wrong!";
-            } else {
+            if ($execute) {
                 $success = true;
-                // Redirect to the next registration page
                 header('location: ./registerverify');
-                // send mail
                 $to = $email;
-                $subject = "Verify Your Account";
+                $subject = "Verify Your Email";
                 $message = "
-                    <div style=\"padding: 10px; background-color: #468ce2; color: #ffffff;\">
-                    Please use the one time verification (OTP) to verify your account: <br> <h1 style=\"text-align: center;  color: #ffffff\">'$token' </h1> <br>
+                    <div style=\"padding: 10px; background-color: #DAA520;\">
+                    Please use the one time verification (OTP) to verify your account: <br> <h1 style='text-align: center;'>'$token' </h1> <br>
                     Thank you <br>
-                    <h3>Innovatetoimpact<h3> <br>
-                    </div>
+                    <h3>Innovate To Impact<h3> <br>
                 ";
 
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
 
                 // More headers
-                $headers .= 'From: Innovatetoimpact <info@innovatetoimpact.org>' . "\r\n";
+                $headers .= 'From: InnovateToImpact <info@innovatetoimpact.com>' . "\r\n";
 
                 $mail = mail($to, $subject, $message, $headers);
-
-                if (!$mail) {
-                    $error = "Failed to verification token, please try again!";
-                }else{
-                    $success = true;
-                    header("Location: ./registerverify"); 
-                }
+               
+            } else {
+                $error = "Oops, something went wrong!";
             }
         }
     }
@@ -109,7 +97,7 @@ ob_end_flush();
         <div style="color: red; padding: 2% 0%;">
             <?php echo $error ?>
         </div>
-        <form action="index.php" method="POST" enctype="multipart/form-data">
+        <form action="index.php" method="post" enctype="multipart/form-data">
 
             <div class="form-group" id="emailDiv">
                     <label for="email">Validate your Email</label>
@@ -122,7 +110,6 @@ ob_end_flush();
     </div>
 
     <script src="./js/form-validation.js"></script>
-    <!-- <script src="./js/form-pages.js"></script> -->
 </body>
 
 </html>
