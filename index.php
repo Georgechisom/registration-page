@@ -52,25 +52,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $execute = mysqli_stmt_execute($stmt);
 
             if ($execute) {
-                $success = true;
-                header('location: ./registerverify');
+                // $success = true;
+                // header('location: ./registerverify');
                 $to = $email;
                 $subject = "Verify Your Email";
                 $message = "
                     <div style=\"padding: 10px; background-color: #DAA520;\">
-                    Please use the one time verification (OTP) to verify your account: <br> <h1 style='text-align: center;'>'$token' </h1> <br>
+                    Please use the one time verification (OTP) to verify your account: <br> <h1 style='text-align: center;'>$token</h1> <br>
                     Thank you <br>
                     <h3>Innovate To Impact<h3> <br>
                 ";
 
                 $headers = "MIME-Version: 1.0" . "\r\n";
                 $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-                // More headers
-                $headers .= 'From: InnovateToImpact <info@innovatetoimpact.com>' . "\r\n";
+                $headers .= 'From: Innovate To Impact <info@register.innovatetoimpact.org>' . "\r\n";
 
                 $mail = mail($to, $subject, $message, $headers);
-               
+
+                if(mail($to, $subject, $message, $headers)) {
+                    $success = true;
+                    header('location: ./studentregister');
+                } else {
+                    $error = 'Message could not be sent';
+                }
+
             } else {
                 $error = "Oops, something went wrong!";
             }

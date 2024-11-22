@@ -21,8 +21,8 @@ if ($result && $result->num_rows > 0) {
             <table border='1'>
                 <thead>
                     <tr>
-                        <th>First Name</th>
-                        <th>Last Name</th>
+                        <th>S/N</th>
+                        <th>Full Names</th>
                         <th>Email</th>
                         <th>Phone</th>
                         <th>Country</th>
@@ -30,16 +30,20 @@ if ($result && $result->num_rows > 0) {
                         <th>School</th>
                         <th>Expertise</th>
                         <th>Volunteer</th>
-                        <th>OTP</th>
+                        <th>ticket_id</th>
+                        <th>Date Registered</th>
                     </tr>
                 </thead>
                 <tbody>";
+                
+    // Initialize counter
+    $index = 1;
 
     // Output data of each row
     while ($row = $result->fetch_assoc()) {
         echo "<tr>
-                <td>{$row['first_name']}</td>
-                <td>{$row['last_name']}</td>
+                 <td>{$index}</td> <!-- Use counter for S/N -->
+                <td>{$row['first_name']} {$row['last_name']}</td>
                 <td>{$row['email']}</td>
                 <td>{$row['phone']}</td>
                 <td>{$row['country']}</td>
@@ -47,8 +51,11 @@ if ($result && $result->num_rows > 0) {
                 <td>{$row['school']}</td>
                 <td>{$row['expertise']}</td>
                 <td>{$row['volunteer']}</td>
-                <td>{$row['OTP']}</td>
+                <td>{$row['ticket_id']}</td>
+                <td>{$row['created_at']}</td>
               </tr>";
+        // Increment the counter
+        $index++;
     }
 
     echo "    </tbody>

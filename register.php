@@ -107,7 +107,7 @@ ob_end_flush();
 
             <div class="form-group" id="emailDiv">
                     <label for="email">Validate your Email</label>
-                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your Email">
+                    <input type="email" id="email" name="email" class="form-control" placeholder="Enter your Email" required>
                     <div class="error" id="emailError">Please enter a valid email address</div>
             </div>
 

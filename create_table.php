@@ -1,9 +1,9 @@
 <?php
 
 $servername = "127.0.0.1";
-$username = "innocxnu_IZI";
-$password = "U!CFjPw0QeJg";
-$dbname = "innocxnu_IZIREG";
+$username = "innocxnu_user";
+$password = "n*9mtYrosw11";
+$dbname = "innocxnu_regform";
 
 try {
     // Create connection

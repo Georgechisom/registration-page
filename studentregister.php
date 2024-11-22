@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $result = $stmt->get_result();
 
         if ($result && $result->num_rows < 1) {
-            $error = "This email is not found";
+            $error = "Email not found";
         } else {
             // update user record into the database
             $stmt = $con->prepare("UPDATE `registrations` SET first_name = ?, last_name = ?, phone = ?, country = ?, state = ?, school = ?, expertise = ?, role = ?, volunteer = ?, ticket_id = ? WHERE email = ?");
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 header('location: https://t.me/+6V-OlkMhN_g1ZGE0');
                 // send mail
                 $to = $email;
-                $subject = "Successful Registration";
+                $subject = "Campus Tour Successful Registration";
                 $message = "
                     <div style=\"padding: 10px; background-color: #ffffff; color: #000000;\">
                         Congratulations! You've registered <br> <br> Dear <strong style=\"color: #000000\">$firstname $lastname </strong> <br> <br>
@@ -426,7 +426,7 @@ ob_end_flush();
 
             <div class="form-group" id="stateDiv">
                 <label for="state">State Located</label>
-                <input type="text" placeholder="State of Origin" id="state" name="state" class="form-control" required>
+                <input type="text" placeholder="state school is located" id="state" name="state" class="form-control" required>
                 <div class="error" id="stateError">Please enter your state</div>
             </div>
 
